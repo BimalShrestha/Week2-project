@@ -27,7 +27,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
      while(true) {
-         System.out.println("Chose the available option 1,2,3: ");
+         System.out.println("Chose the available option 1,2,3,4: ");
          System.out.println("1> Show Available Books");
          System.out.println("2> Show Checked Out Books");
          System.out.println("3> Check in Books");
