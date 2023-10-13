@@ -63,20 +63,37 @@ public class Main {
         if(!isThere){
             System.out.println("All books are checked out.");
         }
-        System.out.println("Select a book to checkout by entering id or type 0 to exit");
-        int select = scanner.nextInt();
-        scanner.nextLine();
-        for (Book element: books){
-            if(element!=null && element.getId()==select){
-                System.out.println("What is your name: ");
-                String name= scanner.nextLine();
-                element.setIsCheckedOut(true);
-                element.setCheckedOut(name);
-                System.out.println(element +" is checkout by "+ element.checkOut(name));
+        boolean isValid = false;
+        while (!isValid) {
+            System.out.println("Select a book to checkout by entering id or type 0 to exit");
+            int select = scanner.nextInt();
+            scanner.nextLine();
+            if (select == 0) {
+                System.out.println("You're heading back to main menu: ");
+                isValid = true;
             }
-        }
-        if (select == 0){
-           System.out.println("You're heading back to main menu: ");
+            else {
+                boolean user = false;
+                for (Book element : books) {
+
+                    if (element != null && element.getId() == select) {
+                        System.out.println("What is your name: ");
+                        String name = scanner.nextLine();
+                        element.setIsCheckedOut(true);
+                        element.setCheckedOut(name);
+                        System.out.println(element + " is checkout by " + element.checkOut(name));
+                        isValid = true;
+                        user = true;
+                        break;
+                    }
+
+                    }
+                if (!user){
+                    System.out.println("Enter the correct input");
+                }
+            }
+
+
         }
     }
 
@@ -96,38 +113,54 @@ public class Main {
         if(!isThere){
             System.out.println("There are no books checked out.");
         }
+        boolean isValid = false;
 
-
-        System.out.println("Enter C to check in a book or X to go back to the home screen: ");
-        String userInput = scanner.nextLine();
-        //while(userInput.equalsIgnoreCase("c")||userInput.equalsIgnoreCase("x")) {
+        while(!isValid) {
+            System.out.println("Enter C to check in a book or X to go back to the home screen: ");
+            String userInput = scanner.nextLine();
 
 
             if (userInput.equalsIgnoreCase("c")) {
                 checkInABook(books);
+                isValid = true;
             } else if (userInput.equalsIgnoreCase("x")) {
                 System.out.println("Your going back to the home screen");
+                isValid=true;
             }
-           // System.out.println("Enter the correct input");
+            else
+                System.out.println("Chose between C or X");
         }
 
-   // }
+        }
+
     public static void checkInABook(Book [] books){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the id of the book to check in or press 0 to go to home Screen ");
-        int id = scanner.nextInt();
-        for(Book element: books){
-            if(element!=null && element.getId()==id){
-                element.setIsCheckedOut(false);
-                element.setCheckedOut(element.checkIn());
-                System.out.println("Your book "+element+" has been checked in");
+        boolean isValid = false;
+        while(!isValid) {
+            System.out.println("Enter the id of the book to check in or press 0 to go to home Screen ");
+            int id = scanner.nextInt();
+            if (id == 0) {
+                System.out.println("you are heading back to main menu");
+                isValid = true;
             }
-        }
-        if (id == 0){
-            System.out.println("you are heading back to main menu");
-        }
+            else {
+                boolean isThere = false;
+                for (Book element : books) {
+                    if (element != null && element.getId() == id && element.IsCheckedOut() == true) {
+                        element.setIsCheckedOut(false);
+                        element.setCheckedOut(element.checkIn());
+                        System.out.println("Your book " + element + " has been checked in");
+                        isThere = true;
+                        isValid = true;
+                        break;
+                    }
+                }
+                if(!isThere){
+                    System.out.println("There is no book for that id to check in press 0 to exit or enter correct id ");
+                }
+            }
 
-
+        }
 
     }
 
