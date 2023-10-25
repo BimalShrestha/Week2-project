@@ -1,5 +1,11 @@
 package com.library;
 import java.util.Scanner;
+
+/*
+Everything is functional and I think you did a good job Bimal.
+A couple small things like naming of variables and using switch vs if/else
+not because of functionality but because of readability. 
+ */
 public class Main {
     public static void main(String[] args){
         Book [] books = new Book[20];
@@ -26,6 +32,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
+        //You broke things down into methods. Nice.
      while(true) {
          System.out.println("Chose the available option 1,2,3,4: ");
          System.out.println("1> Show Available Books");
@@ -60,20 +67,27 @@ public class Main {
                 isThere =true;
             }
         }
+        //I like this check because what if all books are checked out, we don't want to display just a blank screen
         if(!isThere){
             System.out.println("All books are checked out.");
         }
         boolean isValid = false;
         while (!isValid) {
             System.out.println("Select a book to checkout by entering id or type 0 to exit");
+            //I might name this variable userSelection for clarity
             int select = scanner.nextInt();
             scanner.nextLine();
+            //I think a switch case would make this logic more readable. It's hard for me to see
+            //what the choices are
             if (select == 0) {
                 System.out.println("You're heading back to main menu: ");
                 isValid = true;
             }
             else {
                 boolean user = false;
+                //It might be nice if the user picks an id that is out of range
+                //to say we don't have a book, instead of just saying "enter the correct input"
+                //The user might not understand what you mean.
                 for (Book element : books) {
 
                     if (element != null && element.getId() == select) {
