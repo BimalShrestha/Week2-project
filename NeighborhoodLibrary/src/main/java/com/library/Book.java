@@ -7,6 +7,7 @@ public class Book {
     private boolean isCheckedOut;
    private String checkedOutTo;
 
+   //I like that you have constructor overloads. Makes typing easier later.
 
     public Book(){
         this.id = 0;
@@ -81,6 +82,8 @@ public class Book {
         }
        return checkedOutTo;
     }
+
+    //Very advanced!
     @Override
     public String toString(){
         return "Id: "+ id + ", ISBN: "+ isbn+ ", Title: "+ title+" ";
